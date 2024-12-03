@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROM ZEFYROS 2024</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: #f0f8ff;
+            color: #ffffff;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            background: #001f3f;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ffffff;
+        }
+
+        h1 {
+            color: #f1c40f;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #add8e6;
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1rem;
+            border: 1px solid #f1c40f;
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: #001f3f;
+            transition: all 0.3s ease;
+        }
+
+        button {
+            background-color: #f1c40f;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #001f3f;
+            color: #ffffff;
+        }
+
+        footer {
+            background-color: #001f3f;
+            color: #ffffff;
+            padding: 15px 0;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #f1c40f;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .modal, .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .modal {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            color: #001f3f;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .modal img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            background-color: #001f3f;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #f1c40f;
+            color: #001f3f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 PROM ZEFYROS 2024 🎉</h1>
+        <p>¡Bienvenido(a) a una noche inolvidable!</p>
+        <img src="logo.png" width="200" height="200" alt="Logo de Prom Zefyros">
+        <form id="form">
+            <label for="salon">Selecciona tu salón:</label>
+            <select id="salon" aria-label="Selecciona tu salón" required>
+                <option value="">Selecciona tu salón</option>
+                <option value="12A">12A</option>
+                <option value="12B">12B</option>
+            </select>
+            <label for="nombres" style="display: none;">Selecciona tu nombre:</label>
+            <select id="nombres" name="invitado" required style="display: none;">
+                <option value="">Selecciona tu nombre</option>
+            </select>
+            <button type="button" id="confirmar" style="display: none;">Confirmar</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>Organizado por la promoción Zefyros 2024.</p>
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Icono de confirmación">
+        <h2>¡Gracias por participar!</h2>
+        <p>Tu confirmación ha sido registrada con éxito.</p>
+        <button onclick="cerrarModal()">Cerrar</button>
+    </div>
+
+    <script>
+        const nombres = {
+            "12A": [
+                "Brian Aldemir Abrego Rodriguez", "Gabriel Josue Bernal Gallardo", "Jonathan Antonio Castillo Delgado", "Getsemani De Los Angeles Castillo García","Sara Isabel Castillo Villanueva","Edgardo Joel Contreras Guerra","Luz Elena Cornejo Cueto", "Ana Gabriela Figueroa Martin","Fabrishka Fariba Fontane Caballero","Christian Aimar González Cedeño", "Adriana Gabriela González Hernández", "Alexis Armando Lasso Aguirre", "Diego Alejandro Lozada De León", "Brianna Azareth Montero Giraldo", "Lourdes Angeline Montilla Aguilar", "Alejandro Polo Palacios","Dylan Francisco Rodriguez Medina", "Luis Jerónimo Romero Falconette","Zoe Alexa Sánchez Mendoza","Bryan Jaffeth Sobenis Robles", "Jaidy Michelle Tait Cáceres", "Francisco Javier Villalba Muñoz"
+                // Otros nombres...
+            ],
+            "12B": [
+                "Elyan Adolfo Batista Yearwood", "Bárbara Daniela Chávez Barreto", "Madelyn Paulette Cruz Reyes", "Kristin Yaricel Deago Ríos", "Andrea Victoria Gómez Gallardo" , "Xavier Antonio González Méndez" , "Erika Valeria Jiménez Peña" , "Marái Fernanda López Kernahan", "Cherly Paola Lorenzo Camarena", "Celinna Jaasiel Menéndez Camarena" , "Andrés Gabriel Muñoz Castillo" , "Kevin Josue Núñez Canto", "Antonio Javier Pedreschi Saldaña", "Andrés Polo Palacios", "Oscar Emilio Rodríguez Soto",  "Natalia Paola Vásquez Jiménez", "Maria Alejandra Vergara Ramos", "Adrián Emilio Villarreal González", "Somaydi Dalis Villarreal Martínez" , "Angelo Ian Zurita Arancibia"
+                // Otros nombres...
+            ]
+        };
+
+        const salonSelect = document.getElementById('salon');
+        const nombresSelect = document.getElementById('nombres');
+        const confirmarButton = document.getElementById('confirmar');
+        const modal = document.getElementById('modal');
+        const overlay = document.getElementById('overlay');
+
+        salonSelect.addEventListener('change', () => {
+            const salon = salonSelect.value;
+            nombresSelect.innerHTML = '<option value="">Selecciona tu nombre</option>';
+            nombresSelect.style.display = salon ? "block" : "none";
+            confirmarButton.style.display = salon ? "block" : "none";
+
+            if (nombres[salon]) {
+                nombres[salon].forEach(nombre => {
+                    const option = document.createElement("option");
+                    option.value = nombre;
+                    option.textContent = nombre;
+                    nombresSelect.appendChild(option);
+                });
+            }
+        });
+
+        confirmarButton.addEventListener('click', () => {
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        function cerrarModal() {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
